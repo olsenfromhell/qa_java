@@ -16,6 +16,11 @@ public class FelineTest {
     }
 
     @Test
+    public void testFelineGetFood() throws Exception {
+        Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), feline.eatMeat());
+    }
+
+    @Test
     public void testFelineEatMeat() throws Exception {
         Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), feline.getFood("Хищник"));
     }
@@ -26,9 +31,13 @@ public class FelineTest {
     }
 
     @Test
-    public void testGetKittens() {
-        Assert.assertEquals(1, feline.getKittens());
+    public void testGetTwoKittens() {
         Assert.assertEquals(2, feline.getKittens(2));
+    }
+
+    @Test
+    public void testGetOneKitten() {
+        Assert.assertEquals(1, feline.getKittens());
     }
 
     @Test(expected = Exception.class)

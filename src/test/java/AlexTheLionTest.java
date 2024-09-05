@@ -34,7 +34,6 @@ public class AlexTheLionTest {
         List<String> expectedFriends = Arrays.asList("Марти", "Глория", "Мелман");
         // Проверяем, что список друзей Алекса соответствует ожиданиям
         Assert.assertArrayEquals(expectedFriends.toArray(), alexTheLion.getFriends().toArray());
-
     }
 
     @Test
@@ -44,15 +43,32 @@ public class AlexTheLionTest {
     }
 
     @Test
-    public void testLionInheritance() throws Exception {
-        // Проверяем, что методы класса Lion работают правильно
+    public void testLionKittenInheritance() throws Exception {
+        // Проверяем, что метод getKittens() класса Lion работают правильно
         Mockito.when(predatorMock.getKittens()).thenReturn(0);
+
+        Assert.assertEquals(0, predatorMock.getKittens());
+    }
+
+    @Test
+    public void testLionFoodInheritance() throws Exception {
+        // Проверяем, что метод eatMeat() класса Lion работают правильно
         Mockito.when(predatorMock.eatMeat()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
 
+        Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), predatorMock.eatMeat());
+    }
+
+    @Test
+    public void testAlexFood() throws Exception {
+        // Проверяем, что Алекс ест то же что и обычный лев
+        Mockito.when(predatorMock.eatMeat()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
+
+        Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), alexTheLion.getFood());
+    }
+
+    @Test
+    public void testAlexHasMane() throws Exception {
         // Проверяем наличие гривы
         Assert.assertTrue(alexTheLion.doesHaveMane());
-
-        // Проверяем, что Алекс ест то же что и обычный лев
-        Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), alexTheLion.getFood());
     }
 }
