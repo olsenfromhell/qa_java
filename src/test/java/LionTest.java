@@ -18,30 +18,58 @@ public class LionTest {
     public void init() {
         MockitoAnnotations.openMocks(this); }
 
+    // Тесты для льва
+
     @Test
-    public void testLionWithMaleSex() throws Exception {
+    public void testLionGetKittens() throws Exception {
         Mockito.when(predatorMock.getKittens()).thenReturn(3);
+
+        Lion lion = new Lion("Самец", predatorMock);
+
+        Assert.assertEquals(3, lion.getKittens());
+    }
+
+    @Test
+    public void testLionEatMeat() throws Exception {
         Mockito.when(predatorMock.eatMeat()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
 
         Lion lion = new Lion("Самец", predatorMock);
 
-        Assert.assertTrue(lion.doesHaveMane());
-        Assert.assertEquals(3, lion.getKittens());
         Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), lion.getFood());
-
     }
 
     @Test
-    public void testLionWithFemaleSex() throws Exception {
-        Mockito.when(predatorMock.getKittens()).thenReturn(2);
+    public void testLionHasMane() throws Exception {
+        Lion lion = new Lion("Самец", predatorMock);
+
+        Assert.assertTrue(lion.doesHaveMane());
+    }
+
+    // Тесты для львицы
+
+    @Test
+    public void testLionessMane() throws Exception {
+        Lion lioness = new Lion("Самка", predatorMock);
+
+        Assert.assertFalse(lioness.doesHaveMane());
+    }
+
+    @Test
+    public void testLionessEatMeat() throws Exception {
         Mockito.when(predatorMock.eatMeat()).thenReturn(Arrays.asList("Животные", "Птицы", "Рыба"));
 
-        Lion lion = new Lion("Самка", predatorMock);
+        Lion lioness = new Lion("Самка", predatorMock);
 
-        Assert.assertFalse(lion.doesHaveMane());
-        Assert.assertEquals(2, lion.getKittens());
-        Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), lion.getFood());
+        Assert.assertEquals(Arrays.asList("Животные", "Птицы", "Рыба"), lioness.getFood());
+    }
 
+    @Test
+    public void testLionessGetKittens() throws Exception {
+        Mockito.when(predatorMock.getKittens()).thenReturn(2);
+
+        Lion lioness = new Lion("Самка", predatorMock);
+
+        Assert.assertEquals(2, lioness.getKittens());
     }
 
     @Test(expected = Exception.class)
